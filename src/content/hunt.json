@@ -1,0 +1,75 @@
+{
+  "slug": "birthday-breadcrumbs",
+  "title": "Birthday Breadcrumbs",
+  "subtitle": "A pocket-sized scavenger hunt for one excellent human.",
+  "intro": {
+    "eyebrow": "Happy Birthday",
+    "headline": "Your present is hiding behind a trail of clues",
+    "body": [
+      "Everything happens on this phone, so keep it handy while you wander.",
+      "Each clue points you toward a physical spot, and each hidden QR opens the next page in the trail.",
+      "This starter hunt is intentionally easy to customise in src/content/hunt.json once you are ready to swap in your real clues."
+    ],
+    "startLabel": "Start The Hunt"
+  },
+  "finish": {
+    "eyebrow": "Final Reveal",
+    "headline": "You made it to the end",
+    "body": [
+      "This screen is where your real gift reveal, note, or next instruction should live.",
+      "You can change the copy, add a call-to-action link, or even send her to one final real-world location."
+    ],
+    "ctaLabel": "Celebrate Again",
+    "ctaHref": "/hunt"
+  },
+  "theme": {
+    "accent": "#ff6b57",
+    "accentSoft": "#ffe0d9",
+    "background": "#fff7ef",
+    "surface": "#fffdf9",
+    "text": "#26160f",
+    "muted": "#72584b",
+    "border": "#efcfbf"
+  },
+  "steps": [
+    {
+      "id": "birthday-card",
+      "order": 1,
+      "title": "Clue One",
+      "type": "text",
+      "body": "Find the spot where a birthday card would feel right at home.",
+      "hint": "Think of a place that already holds little paper memories or messages.",
+      "hintImage": "/media/keepsake-shelf.svg"
+    },
+    {
+      "id": "sweet-something",
+      "order": 2,
+      "title": "Clue Two",
+      "type": "image",
+      "body": "What area of the house is most likely to hold emergency treats?",
+      "mediaUrl": "/media/snack-drawer.svg",
+      "caption": "A cheerful placeholder image. Swap this for a photo or clue image later.",
+      "hint": "Somewhere snacks go to wait patiently.",
+      "hintImage": "/media/kitchen-clue.svg"
+    },
+    {
+      "id": "soundtrack",
+      "order": 3,
+      "title": "Clue Three",
+      "type": "video",
+      "body": "This clue can be a song, a voice note, or a tiny video clip.",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?si=2f8d1U9f2P1l2x3M",
+      "caption": "Replace the embed URL with your own clue video.",
+      "hint": "Follow the vibe of the clip to the next hiding place."
+    },
+    {
+      "id": "present-time",
+      "order": 4,
+      "title": "Final Clue",
+      "type": "text",
+      "body": "The final QR should be beside the actual present or the note that reveals it.",
+      "hint": "Hide the last code somewhere delightfully obvious once she has earned it.",
+      "hintImage": "/media/final-gift.svg"
+    }
+  ]
+}
