@@ -28,6 +28,13 @@ const CELEBRATION_MESSAGES = [
 const CONFETTI_PIECES = Array.from({ length: 20 }, (_, index) => ({
   id: `confetti-${index + 1}`,
   offset: index,
+  left: [
+    8, 18, 29, 40, 51, 63, 74, 85, 12, 23, 35, 46, 58, 69, 81, 15, 27, 49, 66,
+    78,
+  ][index],
+  top: [
+    9, 6, 11, 7, 13, 8, 12, 10, 20, 17, 22, 18, 24, 19, 21, 30, 27, 29, 26, 31,
+  ][index],
 }));
 
 function getRandomMessage() {
@@ -43,7 +50,13 @@ function ConfettiBurst() {
         <span
           className="confetti-piece"
           key={piece.id}
-          style={{ "--confetti-index": piece.offset } as CSSProperties}
+          style={
+            {
+              "--confetti-index": piece.offset,
+              "--confetti-left": `${piece.left}%`,
+              "--confetti-top": `${piece.top}%`,
+            } as CSSProperties
+          }
         />
       ))}
     </div>

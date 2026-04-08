@@ -1,6 +1,6 @@
-# Present Hunt
+# Present Pursuit
 
-A mobile-first scavenger hunt app built with Next.js for simple Vercel deployment and no server-side database in v1.
+A mobile-first scavenger hunt app built with Next.js for simple Vercel deployment.
 
 ## Quick Start
 
@@ -11,28 +11,54 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## How V1 Works
+For local network testing:
 
-- Hunt content lives in [`src/content/hunt.json`](/Users/aaron/Development/present-hunt/src/content/hunt.json)
-- Each hidden QR code links directly to the next clue page
-- No cookies, sessions, or server-side database are required
+```bash
+pnpm dev:lan
+```
+
+For local HTTPS testing:
+
+```bash
+pnpm dev:https
+```
+
+## Current Hunt Flow
+
+- Hunt content lives in [src/content/hunt.json](/Users/aaron/Development/present-hunt/src/content/hunt.json)
+- Starting the hunt hits `/start`, which creates a signed progress cookie
+- Each physical QR code points to `/scan/[stepId]`
+- Scanning a valid QR updates progress, shows a celebration screen with confetti, and then lets the player continue
+- The app tracks completed steps and unlocks the final `/done` page only after the full trail is complete
+
+Progress is stored in a signed cookie via [src/lib/progress.ts](/Users/aaron/Development/present-hunt/src/lib/progress.ts). Set `HUNT_COOKIE_SECRET` in Vercel so production cookies are signed with your own secret.
 
 ## Customising The Hunt
 
-Edit [`src/content/hunt.json`](/Users/aaron/Development/present-hunt/src/content/hunt.json):
+Edit [src/content/hunt.json](/Users/aaron/Development/present-hunt/src/content/hunt.json):
 
-- intro copy and finish copy
+- app title and intro copy
+- finish copy
 - theme colors
 - ordered steps
-- clue type, body, hint, and step order
-- image paths and video embed URLs
+- clue type, body, captions, and media references
 
-Add any local clue images to `public/` and reference them with paths like `/media/my-clue.jpg`.
+Add local clue images or illustrations to `public/` and reference them with paths like `/media/my-clue.jpg`.
 
-## Routes
+## Main Routes
 
-- `/` intro and start page
-- `/hunt` redirects to the first clue
+- `/` intro page
+- `/how-to` lightweight instructions
+- `/start` resets and starts the tracked hunt
+- `/hunt` redirects to the current clue based on cookie progress
 - `/hunt/[stepId]` clue pages
-- `/done` completion page
+- `/scan/[stepId]` QR scan endpoint
+- `/celebrate/[stepId]` post-scan success screen
+- `/done` final reveal page
 - `/dev/qrs` printable QR sheet
+
+## Notes
+
+- The in-page scanner works best on HTTPS, which is why Vercel previews are useful for real mobile testing.
+- The app currently uses a lightweight CSS approach and native dialog behavior instead of a UI framework.
+- If cookies are cleared, the hunt progress resets.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ScanStatus =
   | { kind: "idle"; message: string }
@@ -8,6 +8,30 @@ type ScanStatus =
   | { kind: "active"; message: string }
   | { kind: "unsupported"; message: string }
   | { kind: "error"; message: string };
+
+type InlineScanResult =
+  | {
+      destination: string;
+      status: "redirect";
+    }
+  | {
+      message: string;
+      nextDestination: string;
+      nextLabel: string;
+      status: "success";
+    };
+
+const INLINE_CONFETTI_PIECES = Array.from({ length: 20 }, (_, index) => ({
+  id: `inline-confetti-${index + 1}`,
+  offset: index,
+  left: [
+    8, 18, 29, 40, 51, 63, 74, 85, 12, 23, 35, 46, 58, 69, 81, 15, 27, 49, 66,
+    78,
+  ][index],
+  top: [
+    9, 6, 11, 7, 13, 8, 12, 10, 20, 17, 22, 18, 24, 19, 21, 30, 27, 29, 26, 31,
+  ][index],
+}));
 
 type BarcodeDetectorLike = {
   detect: (source: ImageBitmapSource) => Promise<Array<{ rawValue?: string }>>;
@@ -29,9 +53,12 @@ function isNavigableResult(result: string): boolean {
     const sameOrigin = url.origin === window.location.origin;
     const allowedPath =
       url.pathname === "/" ||
+      url.pathname === "/start" ||
       url.pathname === "/done" ||
       url.pathname === "/hunt" ||
-      url.pathname.startsWith("/hunt/");
+      url.pathname.startsWith("/hunt/") ||
+      url.pathname.startsWith("/scan/") ||
+      url.pathname.startsWith("/celebrate/");
 
     return sameOrigin && allowedPath;
   } catch {
@@ -42,49 +69,63 @@ function isNavigableResult(result: string): boolean {
 export function InlineQrScanner() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const successDialogRef = useRef<HTMLDialogElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const detectorRef = useRef<BarcodeDetectorLike | null>(null);
   const frameRef = useRef<number | null>(null);
   const [scannerOpen, setScannerOpen] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
   const [showAvailabilityPopup, setShowAvailabilityPopup] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+  const [successState, setSuccessState] = useState<{
+    message: string;
+    nextDestination: string;
+    nextLabel: string;
+  } | null>(null);
+  const [supported, setSupported] = useState(true);
+  const [availabilityMessage, setAvailabilityMessage] = useState<string | null>(
+    null,
+  );
   const [scanStatus, setScanStatus] = useState<ScanStatus>({
     kind: "idle",
     message:
       "Open the camera here if you want to scan the next QR without leaving the page.",
   });
 
-  const supported = useMemo(() => {
-    if (typeof window === "undefined") {
-      return true;
-    }
+  useEffect(() => {
+    setHasMounted(true);
 
     const hasCameraAccess =
       typeof navigator.mediaDevices?.getUserMedia === "function";
     const hasBarcodeDetector = typeof window.BarcodeDetector === "function";
-
-    return Boolean(
+    const nextSupported = Boolean(
       window.isSecureContext && hasCameraAccess && hasBarcodeDetector,
     );
-  }, []);
 
-  const availabilityMessage = useMemo(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
+    setSupported(nextSupported);
 
     if (!window.isSecureContext) {
-      return `This page is not running in a secure context. The in-page scanner works on https:// pages and on localhost, but not on plain http://${window.location.host}.`;
+      setAvailabilityMessage(
+        `This page is not running in a secure context. The in-page scanner works on https:// pages and on localhost, but not on plain http://${window.location.host}.`,
+      );
+      return;
     }
 
-    if (typeof navigator.mediaDevices?.getUserMedia !== "function") {
-      return "This browser does not expose camera access for in-page scanning.";
+    if (!hasCameraAccess) {
+      setAvailabilityMessage(
+        "This browser does not expose camera access for in-page scanning.",
+      );
+      return;
     }
 
-    if (typeof window.BarcodeDetector !== "function") {
-      return "This browser can open the camera, but it does not expose BarcodeDetector for automatic QR scanning.";
+    if (!hasBarcodeDetector) {
+      setAvailabilityMessage(
+        "This browser can open the camera, but it does not expose BarcodeDetector for automatic QR scanning.",
+      );
+      return;
     }
 
-    return null;
+    setAvailabilityMessage(null);
   }, []);
 
   useEffect(() => {
@@ -101,6 +142,21 @@ export function InlineQrScanner() {
       dialog.close();
     }
   }, [scannerOpen]);
+
+  useEffect(() => {
+    const dialog = successDialogRef.current;
+    if (!dialog) {
+      return;
+    }
+
+    if (successOpen && !dialog.open) {
+      dialog.showModal();
+    }
+
+    if (!successOpen && dialog.open) {
+      dialog.close();
+    }
+  }, [successOpen]);
 
   useEffect(() => {
     return () => {
@@ -215,14 +271,35 @@ export function InlineQrScanner() {
               if (match?.rawValue) {
                 setScanStatus({
                   kind: "active",
-                  message: "QR found. Opening the next clue...",
+                  message:
+                    "QR found. Wrapping your tiny victory in sparkles...",
                 });
 
                 for (const track of stream.getTracks()) {
                   track.stop();
                 }
 
-                window.location.assign(match.rawValue);
+                const inlineUrl = new URL(match.rawValue, window.location.href);
+                inlineUrl.searchParams.set("mode", "inline");
+
+                const response = await fetch(inlineUrl.toString(), {
+                  credentials: "same-origin",
+                });
+
+                const result = (await response.json()) as InlineScanResult;
+
+                if (result.status === "redirect") {
+                  window.location.assign(result.destination);
+                  return;
+                }
+
+                setSuccessState({
+                  message: result.message,
+                  nextDestination: result.nextDestination,
+                  nextLabel: result.nextLabel,
+                });
+                setScannerOpen(false);
+                setSuccessOpen(true);
                 return;
               }
             } catch {
@@ -283,6 +360,10 @@ export function InlineQrScanner() {
         <button
           className="button button-primary"
           onClick={() => {
+            if (!hasMounted) {
+              return;
+            }
+
             if (!supported) {
               setShowAvailabilityPopup(true);
               return;
@@ -292,7 +373,9 @@ export function InlineQrScanner() {
           }}
           type="button"
         >
-          {supported ? "Open Camera Scanner" : "Why Scanner Is Unavailable"}
+          {hasMounted && !supported
+            ? "Why Scanner Is Unavailable"
+            : "Open Camera Scanner"}
         </button>
       </div>
 
@@ -363,6 +446,61 @@ export function InlineQrScanner() {
           <p className="scanner-help">
             Hold the QR inside the frame and keep the phone steady for a moment.
           </p>
+        </div>
+      </dialog>
+
+      <dialog
+        aria-label="Celebration"
+        className="scanner-dialog"
+        onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            setSuccessOpen(false);
+          }
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            setSuccessOpen(false);
+          }
+        }}
+        onClose={() => setSuccessOpen(false)}
+        ref={successDialogRef}
+      >
+        <div className="scanner-dialog-panel success-dialog-panel">
+          <div className="confetti-burst" aria-hidden="true">
+            {INLINE_CONFETTI_PIECES.map((piece) => (
+              <span
+                className="confetti-piece"
+                key={piece.id}
+                style={
+                  {
+                    "--confetti-index": piece.offset,
+                    "--confetti-left": `${piece.left}%`,
+                    "--confetti-top": `${piece.top}%`,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
+          </div>
+          <p className="eyebrow">Checkpoint Complete</p>
+          <h3 className="success-title">
+            {successState?.message ?? "Well done."}
+          </h3>
+          <p className="scanner-status-text">
+            You found the right spot. Ready for the next part of the pursuit?
+          </p>
+          <div className="button-group">
+            <button
+              className="button button-primary"
+              onClick={() => {
+                if (successState) {
+                  window.location.assign(successState.nextDestination);
+                }
+              }}
+              type="button"
+            >
+              {successState?.nextLabel ?? "Continue"}
+            </button>
+          </div>
         </div>
       </dialog>
     </section>
