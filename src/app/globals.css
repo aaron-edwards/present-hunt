@@ -4,15 +4,15 @@
     "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "URW Palladio L",
     serif;
   --font-body: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
-  --color-accent: #ff6b57;
-  --color-accent-soft: #ffe0d9;
-  --color-background: #fff7ef;
-  --color-surface: #fffdf9;
-  --color-text: #26160f;
-  --color-muted: #72584b;
-  --color-border: #efcfbf;
-  --shadow-card: 0 16px 40px rgba(38, 22, 15, 0.08);
-  --shadow-soft: 0 10px 24px rgba(38, 22, 15, 0.06);
+  --color-accent: #6a63ff;
+  --color-accent-soft: #e9e6ff;
+  --color-background: #f7f7ff;
+  --color-surface: #fffdfd;
+  --color-text: #231f4d;
+  --color-muted: #6762a0;
+  --color-border: #d9d4ff;
+  --shadow-card: 0 24px 60px rgba(76, 71, 169, 0.12);
+  --shadow-soft: 0 14px 32px rgba(76, 71, 169, 0.12);
 }
 
 * {
@@ -29,16 +29,36 @@ body {
   color: var(--color-text);
   background:
     radial-gradient(
+      circle at 12% 18%,
+      rgba(255, 255, 255, 0.92),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 82% 14%,
+      rgba(255, 226, 156, 0.55),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 88% 62%,
+      rgba(126, 213, 255, 0.32),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 18% 88%,
+      rgba(167, 163, 255, 0.32),
+      transparent 24%
+    ),
+    radial-gradient(
       circle at top left,
       rgba(255, 255, 255, 0.95),
       transparent 30%
     ),
     radial-gradient(
       circle at top right,
-      rgba(255, 107, 87, 0.16),
+      rgba(106, 99, 255, 0.16),
       transparent 24%
     ),
-    linear-gradient(180deg, var(--color-background), #fff1df 100%);
+    linear-gradient(180deg, var(--color-background), #eef4ff 100%);
   font-family: var(--font-body), sans-serif;
 }
 
@@ -60,6 +80,55 @@ iframe {
   padding: 24px 16px 48px;
 }
 
+.site-chrome {
+  margin: 0 auto 18px;
+  display: flex;
+  max-width: 960px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.site-badge,
+.site-link {
+  text-decoration: none;
+}
+
+.site-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow-soft);
+  font-weight: 700;
+}
+
+.site-badge-mark {
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7ed5ff, #8f78ff);
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.55);
+}
+
+.site-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-link {
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: var(--color-muted);
+  font-weight: 700;
+}
+
 .content-stack {
   margin: 0 auto;
   display: flex;
@@ -73,7 +142,7 @@ iframe {
 .qr-card {
   border: 1px solid var(--color-border);
   border-radius: 28px;
-  background: color-mix(in srgb, var(--color-surface) 92%, white);
+  background: color-mix(in srgb, var(--color-surface) 90%, white);
   box-shadow: var(--shadow-card);
 }
 
@@ -86,16 +155,66 @@ iframe {
 .hero-card::after {
   content: "";
   position: absolute;
-  inset: auto -10% -35% auto;
-  width: 220px;
-  height: 220px;
+  inset: auto -12% -38% auto;
+  width: 260px;
+  height: 260px;
   border-radius: 999px;
   background: radial-gradient(
     circle,
-    color-mix(in srgb, var(--color-accent) 34%, white),
+    color-mix(in srgb, var(--color-accent) 36%, white),
     transparent 70%
   );
   pointer-events: none;
+}
+
+.hero-card-sparkle::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: 88px;
+  height: 36px;
+  background:
+    radial-gradient(
+      circle at 12% 50%,
+      rgba(255, 255, 255, 0.95) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 44% 34%,
+      rgba(255, 255, 255, 0.95) 0 3px,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 74% 60%,
+      rgba(255, 255, 255, 0.95) 0 2px,
+      transparent 3px
+    );
+  opacity: 0.9;
+}
+
+.hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 20px;
+}
+
+.hero-copy-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-illustration-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-illustration {
+  width: min(100%, 360px);
+  height: auto;
+  filter: drop-shadow(0 16px 32px rgba(106, 99, 255, 0.18));
 }
 
 .eyebrow {
@@ -145,6 +264,17 @@ h3 {
   max-width: 32ch;
   color: var(--color-muted);
   font-size: 1rem;
+}
+
+.subtitle-large {
+  font-size: 1.08rem;
+}
+
+.hero-tagline {
+  margin: 0;
+  max-width: 28ch;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .hero-copy {
@@ -198,14 +328,46 @@ figcaption {
 .button-primary {
   border: 0;
   color: white;
-  background: linear-gradient(135deg, var(--color-accent), #f58b2a);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    #7ed5ff 52%,
+    #9f84ff
+  );
   box-shadow: var(--shadow-soft);
 }
 
 .button-secondary {
   border: 1px solid var(--color-border);
   color: var(--color-text);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.magic-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.magic-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.magic-pill::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7ed5ff, var(--color-accent));
 }
 
 .meta-row {
@@ -218,7 +380,7 @@ figcaption {
   border: 1px solid var(--color-border);
   border-radius: 20px;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.66);
+  background: rgba(255, 255, 255, 0.78);
 }
 
 .meta-label {
@@ -243,13 +405,8 @@ figcaption {
   padding: 24px 20px;
 }
 
-.status-banner {
-  margin: 0;
-  border: 1px solid color-mix(in srgb, var(--color-accent) 40%, white);
-  border-radius: 18px;
-  padding: 14px 16px;
-  background: var(--color-accent-soft);
-  font-weight: 600;
+.teaser-card h2 {
+  max-width: 16ch;
 }
 
 .media-frame,
@@ -260,7 +417,7 @@ figcaption {
 .empty-card {
   border: 1px solid var(--color-border);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .media-frame,
@@ -316,7 +473,7 @@ figcaption {
   border: 1px solid var(--color-border);
   border-radius: 999px;
   padding: 0 22px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.86);
   color: var(--color-text);
   cursor: pointer;
   font-weight: 700;
@@ -446,6 +603,74 @@ code {
   gap: 18px;
 }
 
+.mini-hero-card h1 {
+  max-width: 14ch;
+}
+
+.celebration-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(255, 240, 247, 0.88)
+    ),
+    white;
+}
+
+.celebration-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -4% -28% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 108, 0.42),
+    transparent 68%
+  );
+}
+
+.instruction-card {
+  padding: 18px;
+}
+
+.instruction-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.instruction-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border: 1px solid var(--color-border);
+  border-radius: 22px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.instruction-step p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.instruction-number {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #7ed5ff, #8f78ff);
+  color: white;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .footer-note {
   color: var(--color-muted);
   font-size: 0.9rem;
@@ -454,6 +679,11 @@ code {
 @media (min-width: 720px) {
   .page-shell {
     padding: 40px 24px 64px;
+  }
+
+  .hero-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+    align-items: center;
   }
 
   .hero-card,
@@ -474,5 +704,9 @@ code {
   .qr-card {
     grid-template-columns: 200px 1fr;
     align-items: center;
+  }
+
+  .instruction-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

@@ -6,13 +6,15 @@ export default function DonePage() {
 
   return (
     <HuntShell>
-      <section className="hero-card">
+      <section className="hero-card hero-card-sparkle mini-hero-card">
         <p className="eyebrow">{hunt.finish.eyebrow}</p>
         <h1>{hunt.finish.headline}</h1>
-        <p className="subtitle">The trail worked. The surprise can begin.</p>
+        <p className="subtitle subtitle-large">
+          The trail worked. Cue the glitter cannon.
+        </p>
       </section>
 
-      <section className="finish-card">
+      <section className="finish-card celebration-card">
         {hunt.finish.body.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}

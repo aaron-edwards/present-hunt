@@ -23,13 +23,13 @@
     "ctaHref": "/hunt"
   },
   "theme": {
-    "accent": "#ff6b57",
-    "accentSoft": "#ffe0d9",
-    "background": "#fff7ef",
-    "surface": "#fffdf9",
-    "text": "#26160f",
-    "muted": "#72584b",
-    "border": "#efcfbf"
+    "accent": "#6a63ff",
+    "accentSoft": "#e9e6ff",
+    "background": "#f7f7ff",
+    "surface": "#fffdfd",
+    "text": "#231f4d",
+    "muted": "#6762a0",
+    "border": "#d9d4ff"
   },
   "steps": [
     {
