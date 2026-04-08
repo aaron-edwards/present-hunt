@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { HuntShell } from "@/components/hunt-shell";
 import { ProgressTracker } from "@/components/progress-tracker";
+import { UnicornBuddy } from "@/components/unicorn-buddy";
 import { getHunt } from "@/lib/hunt";
 import {
   getCompletionItems,
@@ -28,11 +29,17 @@ export default async function DonePage() {
         <p className="eyebrow">{hunt.finish.eyebrow}</p>
         <h1>{hunt.finish.headline}</h1>
         <p className="subtitle subtitle-large">
-          The trail worked. Cue the glitter cannon.
+          The trail is complete, the sparkles agree, and the unicorn is very
+          pleased with you.
         </p>
       </section>
 
       <section className="finish-card celebration-card">
+        <UnicornBuddy
+          className="finish-buddy"
+          imageClassName="finish-buddy-image"
+          variant="cloudSeat"
+        />
         <ProgressTracker items={getCompletionItems(progress)} />
         {hunt.finish.body.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
@@ -49,7 +56,7 @@ export default async function DonePage() {
           </a>
         </div>
         <p className="footer-note">
-          Swap this copy for the real birthday reveal once your clues are ready.
+          Swap this copy for the real reveal once your final verses are ready.
         </p>
       </section>
     </HuntShell>

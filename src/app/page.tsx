@@ -1,6 +1,5 @@
-import Image from "next/image";
-
 import { HuntShell } from "@/components/hunt-shell";
+import { UnicornBuddy } from "@/components/unicorn-buddy";
 import { getHunt } from "@/lib/hunt";
 
 export default function HomePage() {
@@ -15,8 +14,28 @@ export default function HomePage() {
             <h1>{hunt.intro.headline}</h1>
             <p className="subtitle subtitle-large">{hunt.subtitle}</p>
             <p className="hero-tagline">
-              Sparkles, surprises, and a very well-earned present are waiting.
+              Follow the verses, trust the sparkles, and let Bubbles cheer you
+              onward.
             </p>
+
+            <div className="hero-buddy-card">
+              <div className="hero-buddy-copy">
+                <p className="eyebrow">Your Buddy</p>
+                <p className="hero-buddy-name">Bubbles the unicorn</p>
+                <p className="hero-buddy-blurb">
+                  She deals in clues, cheers, and a truly heroic amount of
+                  sparkle.
+                </p>
+              </div>
+              <div className="hero-buddy-art">
+                <UnicornBuddy
+                  className="hero-buddy-asset"
+                  imageClassName="hero-illustration"
+                  priority
+                  variant="happy"
+                />
+              </div>
+            </div>
 
             <div className="button-group">
               <a className="button button-primary" href="/start">
@@ -28,21 +47,10 @@ export default function HomePage() {
             </div>
 
             <div className="magic-list">
-              <span className="magic-pill">Sparkly clues</span>
+              <span className="magic-pill">Rhyming clues</span>
               <span className="magic-pill">QR magic</span>
-              <span className="magic-pill">Birthday treasure</span>
+              <span className="magic-pill">Unicorn company</span>
             </div>
-          </div>
-
-          <div className="hero-illustration-wrap">
-            <Image
-              alt="A cheerful unicorn floating over clouds and sparkles."
-              className="hero-illustration"
-              height={760}
-              priority
-              src="/media/unicorn-party.svg"
-              width={900}
-            />
           </div>
         </div>
       </section>
@@ -50,7 +58,7 @@ export default function HomePage() {
       <section className="meta-row">
         <article className="meta-chip">
           <span className="meta-label">Mood</span>
-          <span className="meta-value">Whimsical chaos</span>
+          <span className="meta-value">Storybook sparkle</span>
         </article>
         <article className="meta-chip">
           <span className="meta-label">Treasure Stops</span>
@@ -58,20 +66,8 @@ export default function HomePage() {
         </article>
         <article className="meta-chip">
           <span className="meta-label">Needs</span>
-          <span className="meta-value">Phone + curiosity</span>
+          <span className="meta-value">Phone + wonder</span>
         </article>
-      </section>
-
-      <section className="card teaser-card">
-        <p className="eyebrow">A Tiny Tease</p>
-        <h2>
-          Every clue leads to a hiding place, and every hiding place unlocks the
-          next little surprise.
-        </h2>
-        <p className="meta-copy">
-          The full instructions have moved to the how-to page so the home screen
-          can stay delightfully dramatic.
-        </p>
       </section>
     </HuntShell>
   );

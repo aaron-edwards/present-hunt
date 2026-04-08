@@ -1,25 +1,25 @@
 {
   "slug": "birthday-breadcrumbs",
   "title": "Present Pursuit",
-  "subtitle": "A pocket-sized scavenger hunt for one excellent human.",
+  "subtitle": "A pocket-sized trail of playful clues, with Bubbles trotting beside you.",
   "intro": {
-    "eyebrow": "Happy Birthday",
-    "headline": "Your present is hiding behind a trail of clues",
+    "eyebrow": "A Sparkly Adventure",
+    "headline": "A present waits at trail's end",
     "body": [
-      "Everything happens on this phone, so keep it handy while you wander.",
-      "Each clue points you toward a physical spot, and each hidden QR opens the next page in the trail.",
-      "This starter hunt is intentionally easy to customise in src/content/hunt.json once you are ready to swap in your real clues."
+      "Keep this phone close by your side while you wander, peek, and roam.",
+      "Each clue will point toward a real-world spot, and each tucked-away QR will open the next verse in the trail.",
+      "Bubbles is here for moral support, sparkle supervision, and triumphant little ta-das."
     ],
-    "startLabel": "Start The Hunt"
+    "startLabel": "Begin The Pursuit"
   },
   "finish": {
-    "eyebrow": "Final Reveal",
-    "headline": "You made it to the end",
+    "eyebrow": "Ta-Da",
+    "headline": "The final verse has led you here",
     "body": [
-      "This screen is where your real gift reveal, note, or next instruction should live.",
-      "You can change the copy, add a call-to-action link, or even send her to one final real-world location."
+      "Here is where the real reveal, surprise note, or final flourish should appear.",
+      "Swap in your proper ending once the clues are ready, and let the unicorn bask in the glory."
     ],
-    "ctaLabel": "Celebrate Again",
+    "ctaLabel": "Take The Trail Again",
     "ctaHref": "/start"
   },
   "theme": {
@@ -37,7 +37,7 @@
       "order": 1,
       "title": "Clue One",
       "type": "text",
-      "body": "Find the spot where a birthday card would feel right at home.",
+      "body": "Where paper wishes like to stay, your first small clue may hide away.",
       "hint": "Think of a place that already holds little paper memories or messages.",
       "hintImage": "/media/keepsake-shelf.svg"
     },
@@ -46,7 +46,7 @@
       "order": 2,
       "title": "Clue Two",
       "type": "image",
-      "body": "What area of the house is most likely to hold emergency treats?",
+      "body": "Where little treats are tucked from view, there waits a brighter hint for you.",
       "mediaUrl": "/media/snack-drawer.svg",
       "caption": "A cheerful placeholder image. Swap this for a photo or clue image later.",
       "hint": "Somewhere snacks go to wait patiently.",
@@ -57,7 +57,7 @@
       "order": 3,
       "title": "Clue Three",
       "type": "video",
-      "body": "This clue can be a song, a voice note, or a tiny video clip.",
+      "body": "A tune, a note, a moving clue, may hum the next stop just for you.",
       "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?si=2f8d1U9f2P1l2x3M",
       "caption": "Replace the embed URL with your own clue video.",
       "hint": "Follow the vibe of the clip to the next hiding place."
@@ -67,7 +67,7 @@
       "order": 4,
       "title": "Final Clue",
       "type": "text",
-      "body": "The final QR should be beside the actual present or the note that reveals it.",
+      "body": "The final sign is tucked quite near the gift or note that waits right here.",
       "hint": "Hide the last code somewhere delightfully obvious once she has earned it.",
       "hintImage": "/media/final-gift.svg"
     }

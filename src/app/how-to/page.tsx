@@ -2,10 +2,10 @@ import { HuntShell } from "@/components/hunt-shell";
 import { getHunt } from "@/lib/hunt";
 
 const HOW_TO_STEPS = [
-  "Open each clue on the phone and head to the place it hints at.",
-  "Find the hidden QR code at that location.",
-  "Scan it with the in-page scanner or your normal camera app to unlock the next clue.",
-  "Keep going until the final reveal appears.",
+  "Read the clue on your phone, then follow the rhyme to the place it suggests.",
+  "Find the hidden QR waiting there with excellent secret-keeping skills.",
+  "Scan it with the in-page camera or your normal camera app to reveal the next verse.",
+  "Keep going until the final reveal arrives and your unicorn buddy can celebrate.",
 ];
 
 export default function HowToPage() {
@@ -15,10 +15,10 @@ export default function HowToPage() {
     <HuntShell>
       <section className="hero-card mini-hero-card">
         <p className="eyebrow">How To Play</p>
-        <h1>Very easy. Very magical.</h1>
+        <h1>Read the rhyme. Find the sign.</h1>
         <p className="subtitle subtitle-large">
-          Everything you need lives on the phone. The rest is sparkle-fueled
-          detective work.
+          Everything you need lives on the phone. The rest is a mix of curious
+          wandering and unicorn-approved instinct.
         </p>
       </section>
 
@@ -35,7 +35,7 @@ export default function HowToPage() {
 
       <section className="card">
         <p className="eyebrow">Helpful Notes</p>
-        <h2>What to keep in mind</h2>
+        <h2>A few things to remember</h2>
         <div className="hero-copy">
           {hunt.intro.body.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
@@ -43,7 +43,7 @@ export default function HowToPage() {
         </div>
         <div className="button-group">
           <a className="button button-primary" href="/start">
-            Start The Hunt
+            Begin The Pursuit
           </a>
           <a className="button button-secondary" href="/">
             Back Home

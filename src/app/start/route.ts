@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getFirstStep } from "@/lib/hunt";
+import { getFirstStep, getHuntDestination } from "@/lib/hunt";
 import {
   createInitialProgress,
   getCookieName,
@@ -9,7 +9,7 @@ import {
 
 export async function GET(request: Request) {
   const response = NextResponse.redirect(
-    new URL(`/hunt/${getFirstStep().id}`, request.url),
+    new URL(getHuntDestination(getFirstStep().id), request.url),
   );
 
   response.cookies.set({

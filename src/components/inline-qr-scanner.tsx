@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { UnicornBuddy } from "@/components/unicorn-buddy";
+
 type ScanStatus =
   | { kind: "idle"; message: string }
   | { kind: "starting"; message: string }
@@ -351,11 +353,6 @@ export function InlineQrScanner() {
 
   return (
     <section className="scanner-card">
-      <div className="scanner-copy">
-        <p className="eyebrow">Ready?</p>
-        <h3>Scan the QR</h3>
-      </div>
-
       <div className="button-group">
         <button
           className="button button-primary"
@@ -375,7 +372,7 @@ export function InlineQrScanner() {
         >
           {hasMounted && !supported
             ? "Why Scanner Is Unavailable"
-            : "Open Camera Scanner"}
+            : "Scan the QR"}
         </button>
       </div>
 
@@ -485,6 +482,11 @@ export function InlineQrScanner() {
           <h3 className="success-title">
             {successState?.message ?? "Well done."}
           </h3>
+          <UnicornBuddy
+            className="success-buddy"
+            imageClassName="success-buddy-image"
+            variant="cheer"
+          />
           <p className="scanner-status-text">
             You found the right spot. Ready for the next part of the pursuit?
           </p>

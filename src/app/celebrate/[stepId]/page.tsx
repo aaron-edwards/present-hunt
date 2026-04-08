@@ -3,7 +3,8 @@ import type { CSSProperties } from "react";
 
 import { HuntShell } from "@/components/hunt-shell";
 import { ProgressTracker } from "@/components/progress-tracker";
-import { getNextDestination, getStepById } from "@/lib/hunt";
+import { UnicornBuddy } from "@/components/unicorn-buddy";
+import { getNextDestination, getStepByPublicSlug } from "@/lib/hunt";
 import {
   getCompletionItems,
   isStarted,
@@ -18,11 +19,11 @@ type CelebratePageProps = {
 };
 
 const CELEBRATION_MESSAGES = [
-  "Well done, treasure hunter.",
-  "Sparkly success unlocked.",
-  "That was exactly the right spot.",
-  "Another clue conquered.",
-  "Yes. Absolutely nailed it.",
+  "A clever find, right on cue.",
+  "That little rhyme led true.",
+  "You found the spot. Hooray for you.",
+  "Another verse is fluttering through.",
+  "Your unicorn buddy approves of you.",
 ];
 
 const CONFETTI_PIECES = Array.from({ length: 20 }, (_, index) => ({
@@ -65,7 +66,7 @@ function ConfettiBurst() {
 
 export default async function CelebratePage({ params }: CelebratePageProps) {
   const { stepId } = await params;
-  const step = getStepById(stepId);
+  const step = getStepByPublicSlug(stepId);
   const progress = await readProgressCookie();
 
   if (!step || !isStarted(progress) || !isStepCompleted(progress, stepId)) {
@@ -74,9 +75,7 @@ export default async function CelebratePage({ params }: CelebratePageProps) {
 
   const nextDestination = getNextDestination(stepId);
   const nextLabel =
-    nextDestination === "/done"
-      ? "See the final reveal"
-      : "Go to the next clue";
+    nextDestination === "/done" ? "See The Final Reveal" : "Continue";
 
   return (
     <HuntShell>
@@ -85,8 +84,14 @@ export default async function CelebratePage({ params }: CelebratePageProps) {
         <p className="eyebrow">Checkpoint Complete</p>
         <h1>{getRandomMessage()}</h1>
         <p className="subtitle subtitle-large">
-          You unlocked the next part of the pursuit.
+          Another sparkling stop is complete, and the next verse is ready when
+          you are.
         </p>
+        <UnicornBuddy
+          className="celebration-buddy"
+          imageClassName="celebration-buddy-image"
+          variant="sparklers"
+        />
         <ProgressTracker items={getCompletionItems(progress)} />
         <div className="button-group">
           <a className="button button-primary" href={nextDestination}>

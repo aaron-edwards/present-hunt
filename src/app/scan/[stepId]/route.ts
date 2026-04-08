@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 
-import { getHunt, getStepById, getStepIndex } from "@/lib/hunt";
+import {
+  getCelebrateDestination,
+  getHunt,
+  getHuntDestination,
+  getStepByPublicSlug,
+  getStepIndex,
+} from "@/lib/hunt";
 import {
   completeStep,
   getCookieName,
@@ -33,7 +39,7 @@ function getRandomMessage() {
 
 export async function GET(request: Request, context: ScanRouteContext) {
   const { stepId } = await context.params;
-  const step = getStepById(stepId);
+  const step = getStepByPublicSlug(stepId);
   const requestUrl = new URL(request.url);
   const inlineMode = requestUrl.searchParams.get("mode") === "inline";
 
@@ -60,37 +66,45 @@ export async function GET(request: Request, context: ScanRouteContext) {
 
     if (inlineMode) {
       return NextResponse.json({
-        destination: currentStep ? `/hunt/${currentStep.id}` : "/done",
+        destination: currentStep ? getHuntDestination(currentStep.id) : "/done",
         status: "redirect",
       });
     }
 
     return NextResponse.redirect(
-      new URL(currentStep ? `/hunt/${currentStep.id}` : "/done", request.url),
+      new URL(
+        currentStep ? getHuntDestination(currentStep.id) : "/done",
+        request.url,
+      ),
     );
   }
 
-  if (getStepIndex(stepId) !== getCurrentStepIndex(progress)) {
+  if (getStepIndex(step.id) !== getCurrentStepIndex(progress)) {
     const hunt = getHunt();
     const currentStep = hunt.steps[getCurrentStepIndex(progress)];
 
     if (inlineMode) {
       return NextResponse.json({
-        destination: currentStep ? `/hunt/${currentStep.id}` : "/done",
+        destination: currentStep ? getHuntDestination(currentStep.id) : "/done",
         status: "redirect",
       });
     }
 
     return NextResponse.redirect(
-      new URL(currentStep ? `/hunt/${currentStep.id}` : "/done", request.url),
+      new URL(
+        currentStep ? getHuntDestination(currentStep.id) : "/done",
+        request.url,
+      ),
     );
   }
 
-  const updatedProgress = completeStep(progress, stepId);
+  const updatedProgress = completeStep(progress, step.id);
   const nextDestination =
     updatedProgress.currentStepIndex >= getHunt().steps.length
       ? "/done"
-      : `/hunt/${getHunt().steps[updatedProgress.currentStepIndex].id}`;
+      : getHuntDestination(
+          getHunt().steps[updatedProgress.currentStepIndex].id,
+        );
   const response = inlineMode
     ? NextResponse.json({
         message: getRandomMessage(),
@@ -101,7 +115,9 @@ export async function GET(request: Request, context: ScanRouteContext) {
             : "Go to the next clue",
         status: "success",
       })
-    : NextResponse.redirect(new URL(`/celebrate/${stepId}`, request.url));
+    : NextResponse.redirect(
+        new URL(getCelebrateDestination(step.id), request.url),
+      );
 
   response.cookies.set({
     name: getCookieName(),

@@ -3,7 +3,12 @@ import { notFound, redirect } from "next/navigation";
 import { HuntShell } from "@/components/hunt-shell";
 import { HuntStepCard } from "@/components/hunt-step-card";
 import { ProgressTracker } from "@/components/progress-tracker";
-import { getHunt, getStepById, getStepIndex } from "@/lib/hunt";
+import {
+  getHunt,
+  getHuntDestination,
+  getStepByPublicSlug,
+  getStepIndex,
+} from "@/lib/hunt";
 import {
   getCompletionItems,
   getCurrentStepIndex,
@@ -21,7 +26,7 @@ type StepPageProps = {
 export default async function StepPage({ params }: StepPageProps) {
   const { stepId } = await params;
   const hunt = getHunt();
-  const step = getStepById(stepId);
+  const step = getStepByPublicSlug(stepId);
   const progress = await readProgressCookie();
 
   if (!step) {
@@ -40,7 +45,7 @@ export default async function StepPage({ params }: StepPageProps) {
   const currentStep = hunt.steps[getCurrentStepIndex(progress)];
 
   if (currentStep.id !== step.id) {
-    redirect(`/hunt/${currentStep.id}`);
+    redirect(getHuntDestination(currentStep.id));
   }
 
   return (

@@ -44,6 +44,7 @@ Edit [src/content/hunt.json](/Users/aaron/Development/present-hunt/src/content/h
 - clue type, body, captions, and media references
 
 Add local clue images or illustrations to `public/` and reference them with paths like `/media/my-clue.jpg`.
+The current mascot images live in `public/media/unicorns/`.
 
 ## Main Routes
 

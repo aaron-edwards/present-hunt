@@ -1,6 +1,6 @@
 import { HuntShell } from "@/components/hunt-shell";
 import { QrCard } from "@/components/qr-card";
-import { getHunt } from "@/lib/hunt";
+import { getHunt, getScanDestination } from "@/lib/hunt";
 import { getBaseUrl } from "@/lib/site";
 
 export default async function QrPage() {
@@ -30,7 +30,7 @@ export default async function QrPage() {
             key={step.id}
             title={`${step.order}. ${step.title}`}
             subtitle={`Hide this at the answer to clue ${step.order}. Scanning it records progress and unlocks the next screen.`}
-            value={`${baseUrl}/scan/${step.id}`}
+            value={`${baseUrl}${getScanDestination(step.id)}`}
           />
         ))}
       </section>

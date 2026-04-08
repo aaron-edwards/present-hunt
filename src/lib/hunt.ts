@@ -107,6 +107,26 @@ export function getStepById(stepId: string): HuntStep | undefined {
   return huntConfig.steps.find((step) => step.id === stepId);
 }
 
+export function getPublicStepSlug(stepId: string): string {
+  const stepIndex = getStepIndex(stepId);
+  return stepIndex === -1 ? stepId : `question-${stepIndex + 1}`;
+}
+
+export function getStepByPublicSlug(stepSlug: string): HuntStep | undefined {
+  const matchedById = getStepById(stepSlug);
+  if (matchedById) {
+    return matchedById;
+  }
+
+  const match = /^question-(\d+)$/.exec(stepSlug);
+  if (!match) {
+    return undefined;
+  }
+
+  const stepIndex = Number.parseInt(match[1], 10) - 1;
+  return huntConfig.steps[stepIndex];
+}
+
 export function getStepIndex(stepId: string): number {
   return huntConfig.steps.findIndex((step) => step.id === stepId);
 }
@@ -119,5 +139,17 @@ export function getNextDestination(stepId: string): string {
     return "/done";
   }
 
-  return `/hunt/${nextStep.id}`;
+  return `/hunt/${getPublicStepSlug(nextStep.id)}`;
+}
+
+export function getHuntDestination(stepId: string): string {
+  return `/hunt/${getPublicStepSlug(stepId)}`;
+}
+
+export function getCelebrateDestination(stepId: string): string {
+  return `/celebrate/${getPublicStepSlug(stepId)}`;
+}
+
+export function getScanDestination(stepId: string): string {
+  return `/scan/${getPublicStepSlug(stepId)}`;
 }

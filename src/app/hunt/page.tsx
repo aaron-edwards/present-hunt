@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { getHunt } from "@/lib/hunt";
+import { getHunt, getHuntDestination } from "@/lib/hunt";
 import {
   getCurrentStepIndex,
   isComplete,
@@ -21,5 +21,5 @@ export default async function HuntEntryPage() {
 
   const hunt = getHunt();
   const currentStep = hunt.steps[getCurrentStepIndex(progress)];
-  redirect(`/hunt/${currentStep.id}`);
+  redirect(getHuntDestination(currentStep.id));
 }
