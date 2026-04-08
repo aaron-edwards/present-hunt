@@ -25,6 +25,26 @@ const UNICORN_ASSETS = {
     alt: "Bubbles blowing shimmering bubbles.",
     src: "/media/unicorns/unicorn-bubbles-new.png",
   },
+  triceratops: {
+    alt: "Bubbles walking a tiny triceratops friend.",
+    src: "/media/unicorns/unicorn-triceratops.png",
+  },
+  racecar: {
+    alt: "Bubbles driving a bright racecar.",
+    src: "/media/unicorns/unicorn-racecar.png",
+  },
+  painting: {
+    alt: "Bubbles painting a rainbow at an easel.",
+    src: "/media/unicorns/unicorn-painting.png",
+  },
+  flowers: {
+    alt: "Bubbles carrying flowers in a spring garden.",
+    src: "/media/unicorns/unicorn-flowers.png",
+  },
+  donut: {
+    alt: "Bubbles eating a pink frosted donut.",
+    src: "/media/unicorns/unicorn-donut.png",
+  },
 } as const;
 
 export type UnicornVariant = keyof typeof UNICORN_ASSETS;

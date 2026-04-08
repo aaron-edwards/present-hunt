@@ -9,6 +9,11 @@ let assetPaths = [
   "/Users/aaron/Development/present-hunt/public/media/unicorns/unicorn-party-new.png",
   "/Users/aaron/Development/present-hunt/public/media/unicorns/unicorn-bake.png",
   "/Users/aaron/Development/present-hunt/public/media/unicorns/unicorn-wizard.png",
+  "/Users/aaron/Development/present-hunt/public/media/unicorns/unicorn-triceratops.png",
+  "/Users/aaron/Development/present-hunt/public/media/unicorns/unicorn-racecar.png",
+  "/Users/aaron/Development/present-hunt/public/media/unicorns/unicorn-painting.png",
+  "/Users/aaron/Development/present-hunt/public/media/unicorns/unicorn-flowers.png",
+  "/Users/aaron/Development/present-hunt/public/media/unicorns/unicorn-donut.png",
 ]
 
 let threshold = 0.12

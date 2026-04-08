@@ -1,8 +1,6 @@
-"use client";
-
 import Image from "next/image";
 
-import { InlineQrScanner } from "@/components/inline-qr-scanner";
+import { InlineQrScannerShell } from "@/components/inline-qr-scanner-shell";
 import { UnicornBuddy } from "@/components/unicorn-buddy";
 import type { HuntStep } from "@/lib/hunt";
 
@@ -17,6 +15,15 @@ export function HuntStepCard({
   stepNumber,
   totalSteps,
 }: HuntStepCardProps) {
+  const companionVariant =
+    stepNumber === 1
+      ? "triceratops"
+      : stepNumber % 4 === 2
+        ? "flowers"
+        : stepNumber % 4 === 3
+          ? "painting"
+          : "donut";
+
   return (
     <>
       <article className="card">
@@ -53,7 +60,7 @@ export function HuntStepCard({
           </div>
         ) : null}
 
-        <InlineQrScanner />
+        <InlineQrScannerShell />
       </article>
 
       <section className="buddy-note">
@@ -67,7 +74,7 @@ export function HuntStepCard({
         <UnicornBuddy
           className="buddy-note-art"
           imageClassName="buddy-note-image"
-          variant={stepNumber % 2 === 0 ? "bubbles" : "cloudLeap"}
+          variant={companionVariant}
         />
       </section>
     </>
