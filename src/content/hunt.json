@@ -36,7 +36,12 @@
       "id": "question-1",
       "order": 1,
       "title": "Clue One",
-      "body": "Seek the tiny sage so wise, with pointed palm and watchful eyes. Behind that pose, where secrets stay, your next small verse is tucked away.",
+      "body": [
+        "Seek the tiny sage so wise,",
+        "with pointed palm and watchful eyes.",
+        "Behind that pose, where secrets stay,",
+        "your next small verse is tucked away."
+      ],
       "hint": "Look behind the Baby Yoda statue with one hand stretched out like the Force.",
       "solution": "Behind the Baby Yoda (Grogu) statue with his arm out."
     },
@@ -44,7 +49,12 @@
       "id": "question-2",
       "order": 2,
       "title": "Clue Two",
-      "body": "Find where your face looks back at you, with disco sparkle shining through. Behind that shine, just out of view, another singing clue waits for you.",
+      "body": [
+        "Find where your face looks back at you,",
+        "with disco sparkle shining through.",
+        "Behind that shine, just out of view,",
+        "another singing clue waits for you."
+      ],
       "hint": "Check behind the mirror that has been decorated with mirror balls.",
       "solution": "Behind the mirror decorated with mirror balls."
     },
@@ -52,7 +62,12 @@
       "id": "question-3",
       "order": 3,
       "title": "Clue Three",
-      "body": "Outside where little berries grow, beneath the net in rows below, where makeshift shelter guards each patch, your hidden clue is there to catch.",
+      "body": [
+        "Outside where little berries grow,",
+        "beneath the net in rows below,",
+        "where makeshift shelter guards each patch,",
+        "your hidden clue is there to catch."
+      ],
       "hint": "Check the strawberry patch outside, around the makeshift netting setup.",
       "solution": "In the outdoor strawberry patch near the makeshift netting."
     }

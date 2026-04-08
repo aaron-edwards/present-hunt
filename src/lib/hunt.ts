@@ -29,7 +29,7 @@ export type HuntStep = {
   id: string;
   order: number;
   title: string;
-  body: string;
+  body: string[];
   solution: string;
   hint?: string;
 };
@@ -70,7 +70,16 @@ function normaliseHuntConfig(rawConfig: HuntConfig): HuntConfig {
 
     assert(step.order > 0, `step "${step.id}" needs a positive order`);
     assert(step.title, `step "${step.id}" needs a title`);
-    assert(step.body, `step "${step.id}" needs body copy`);
+    assert(
+      Array.isArray(step.body) && step.body.length > 0,
+      `step "${step.id}" needs body lines`,
+    );
+    step.body.forEach((line, lineIndex) => {
+      assert(
+        typeof line === "string" && line.trim().length > 0,
+        `step "${step.id}" body line ${lineIndex + 1} must be non-empty`,
+      );
+    });
     assert(step.solution, `step "${step.id}" needs a solution`);
   });
 

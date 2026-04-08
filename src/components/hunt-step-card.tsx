@@ -31,7 +31,14 @@ export function HuntStepCard({
           Step {stepNumber} of {totalSteps}
         </p>
         <h2>{step.title}</h2>
-        <p className="lede clue-lede">{step.body}</p>
+        <p className="lede clue-lede">
+          {step.body.map((line, lineIndex) => (
+            <span key={`${step.id}-${line}`}>
+              {lineIndex > 0 ? <br /> : null}
+              {line}
+            </span>
+          ))}
+        </p>
 
         <InlineQrScannerShell />
       </article>
