@@ -19,17 +19,12 @@ export default async function QrPage() {
       </section>
 
       <section className="qr-grid">
-        <QrCard
-          title="Start Hunt"
-          subtitle="Use this if you want the intro page itself as a scannable starting point."
-          value={`${baseUrl}/start`}
-        />
+        <QrCard title="Start Hunt" value={`${baseUrl}/`} />
 
         {hunt.steps.map((step) => (
           <QrCard
             key={step.id}
             title={`${step.order}. ${step.title}`}
-            subtitle={`Hide this at the answer to clue ${step.order}. Solution: ${step.solution}`}
             value={`${baseUrl}${getScanDestination(step.id)}`}
           />
         ))}

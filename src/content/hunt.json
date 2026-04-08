@@ -6,9 +6,10 @@
     "eyebrow": "A Sparkly Adventure",
     "headline": "A present waits at trail's end",
     "body": [
-      "Keep this phone close by your side while you wander, peek, and roam.",
-      "Each clue will point toward a real-world spot, and each tucked-away QR will open the next verse in the trail.",
-      "Bubbles is here for moral support, sparkle supervision, and triumphant little ta-das."
+      "Keep this little phone close by your side,",
+      "through every corner, clue, and stride.",
+      "Each hidden code will light your way,",
+      "as Bubbles cheers your grand hooray."
     ],
     "startLabel": "Begin The Pursuit"
   },
@@ -16,8 +17,10 @@
     "eyebrow": "Ta-Da",
     "headline": "The final verse has led you here",
     "body": [
-      "Here is where the real reveal, surprise note, or final flourish should appear.",
-      "Swap in your proper ending once the clues are ready, and let the unicorn bask in the glory."
+      "You followed each rhyme from clue to clue,",
+      "and now the sparkly trail is through.",
+      "Your final surprise belongs right here,",
+      "with happy hearts and unicorn cheer."
     ],
     "ctaLabel": "Take The Trail Again",
     "ctaHref": "/start"
@@ -50,7 +53,7 @@
     {
       "id": "question-1",
       "order": 1,
-      "title": "Clue One",
+      "title": "The Tiny Sage's Secret",
       "body": [
         "Seek the tiny sage so wise,",
         "with pointed palm and watchful eyes.",
@@ -63,7 +66,7 @@
     {
       "id": "question-2",
       "order": 2,
-      "title": "Clue Two",
+      "title": "Disco Reflection",
       "body": [
         "Find where your face looks back at you,",
         "with disco sparkle shining through.",
@@ -76,15 +79,67 @@
     {
       "id": "question-3",
       "order": 3,
-      "title": "Clue Three",
+      "title": "Under Gentle Cover",
       "body": [
-        "Outside where little berries grow,",
-        "beneath the net in rows below,",
-        "where makeshift shelter guards each patch,",
-        "your hidden clue is there to catch."
+        "Step outside to garden rows,",
+        "where summer sweetness softly grows.",
+        "By the net stretched up around,",
+        "your clue is waiting to be found."
       ],
       "hint": "Check the strawberry patch outside, around the makeshift netting setup.",
       "solution": "In the outdoor strawberry patch near the makeshift netting."
+    },
+    {
+      "id": "question-4",
+      "order": 4,
+      "title": "The Staring Pair",
+      "body": [
+        "Big round eyes that never blink,",
+        "watching snacks and every drink.",
+        "Find the biggest staring pair,",
+        "your next small clue is hiding there."
+      ],
+      "hint": "Check the biggest googly eyes in the house, on the fridge.",
+      "solution": "Near the biggest googly eyes on the fridge."
+    },
+    {
+      "id": "question-5",
+      "order": 5,
+      "title": "Reborn Sparkle",
+      "body": [
+        "Find old trash reborn today,",
+        "now dressed in gems and bright display.",
+        "A crafty glow with vibrant hair,",
+        "your next small clue is hidden there."
+      ],
+      "hint": "Look near your 'trash pony' craft project: the one bedazzled with gems, purple hair, and a horn.",
+      "solution": "Hidden near the bedazzled 'trash pony' craft project."
+    },
+    {
+      "id": "question-6",
+      "order": 6,
+      "title": "The Little Hidden Door",
+      "body": [
+        "Where tiny doors in stumps appear,",
+        "and fairy whispers hover near,",
+        "behind that little story space,",
+        "your waiting clue is tucked in place."
+      ],
+      "hint": "Check behind the tree stump fairy house.",
+      "solution": "Behind the tree stump fairy house."
+    },
+    {
+      "id": "question-7",
+      "order": 7,
+      "title": "Bean's Golden Finale",
+      "body": [
+        "For many days at Bean's own place,",
+        "we shared his couch and goofy face.",
+        "One runny day became household fame,",
+        "now find him in gold to end this game."
+      ],
+      "hint": "Look near the gold statue of Pinto (Pinto Bean).",
+      "solution": "Near the gold statue of Pinto Bean."
     }
   ]
 }

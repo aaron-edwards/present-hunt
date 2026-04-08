@@ -41,9 +41,14 @@ export default async function DonePage() {
           variant={getCelebrationBuddyVariant()}
         />
         <ProgressTracker items={getCompletionItems(progress)} />
-        {hunt.finish.body.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+        <p className="lede finish-verse">
+          {hunt.finish.body.map((line, lineIndex) => (
+            <span key={line}>
+              {lineIndex > 0 ? <br /> : null}
+              {line}
+            </span>
+          ))}
+        </p>
         <div className="button-group">
           <a
             className="button button-primary"

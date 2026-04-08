@@ -2,7 +2,7 @@ import QRCode from "react-qr-code";
 
 type QrCardProps = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   value: string;
 };
 
@@ -14,7 +14,7 @@ export function QrCard({ title, subtitle, value }: QrCardProps) {
       </div>
       <div className="qr-copy">
         <h3>{title}</h3>
-        <p>{subtitle}</p>
+        {subtitle ? <p>{subtitle}</p> : null}
         <code>{value}</code>
       </div>
     </article>

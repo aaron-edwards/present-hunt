@@ -289,9 +289,9 @@ iframe {
 }
 
 .hero-illustration {
-  width: min(100%, 190px);
+  width: auto;
+  max-width: 100%;
   height: auto;
-  filter: drop-shadow(0 16px 32px rgba(106, 99, 255, 0.18));
 }
 
 .eyebrow {
@@ -312,7 +312,6 @@ h3 {
 }
 
 h1 {
-  max-width: 9ch;
   font-size: clamp(2.3rem, 8vw, 5.2rem);
   letter-spacing: -0.03em;
 }
@@ -351,6 +350,16 @@ h3 {
   color: color-mix(in srgb, var(--color-text) 88%, white);
   font-size: 1rem;
   line-height: 1.55;
+}
+
+.hero-title {
+  max-width: 13ch;
+  text-wrap: balance;
+}
+
+.hero-intro-verse {
+  max-width: 32ch;
+  white-space: pre-line;
 }
 
 .hero-copy {
@@ -491,9 +500,9 @@ figcaption {
 }
 
 .clue-buddy-image {
-  width: min(100%, 132px);
+  width: auto;
+  max-width: 100%;
   height: auto;
-  filter: drop-shadow(0 10px 16px rgba(106, 99, 255, 0.12));
 }
 
 .teaser-card h2 {
@@ -702,9 +711,9 @@ figcaption {
 }
 
 .success-buddy-image {
-  width: min(100%, 160px);
+  width: auto;
+  max-width: 100%;
   height: auto;
-  filter: drop-shadow(0 16px 26px rgba(106, 99, 255, 0.16));
 }
 
 .qr-grid {
@@ -753,6 +762,14 @@ code {
   gap: 18px;
 }
 
+.finish-verse {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.08rem, 3.6vw, 1.32rem);
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
 .mini-hero-card h1 {
   max-width: 14ch;
 }
@@ -791,9 +808,9 @@ code {
 
 .celebration-buddy-image,
 .finish-buddy-image {
-  width: min(100%, 172px);
+  width: auto;
+  max-width: 100%;
   height: auto;
-  filter: drop-shadow(0 16px 28px rgba(106, 99, 255, 0.18));
 }
 
 .confetti-burst {
@@ -954,19 +971,6 @@ code {
 
   .hero-copy-wrap {
     gap: 16px;
-  }
-
-  .hero-buddy-art .hero-illustration {
-    width: min(100%, 200px);
-  }
-
-  .clue-buddy-image {
-    width: min(100%, 148px);
-  }
-
-  .celebration-buddy-image,
-  .finish-buddy-image {
-    width: min(100%, 210px);
   }
 
   .meta-row {

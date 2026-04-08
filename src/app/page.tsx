@@ -11,11 +11,14 @@ export default function HomePage() {
         <div className="hero-layout">
           <div className="hero-copy-wrap">
             <p className="eyebrow">{hunt.intro.eyebrow}</p>
-            <h1>{hunt.intro.headline}</h1>
-            <p className="subtitle subtitle-large">{hunt.subtitle}</p>
-            <p className="hero-tagline">
-              Follow the verses, trust the sparkles, and let Bubbles cheer you
-              onward.
+            <h1 className="hero-title">{hunt.intro.headline}</h1>
+            <p className="subtitle subtitle-large hero-intro-verse">
+              {hunt.intro.body.map((line, lineIndex) => (
+                <span key={line}>
+                  {lineIndex > 0 ? <br /> : null}
+                  {line}
+                </span>
+              ))}
             </p>
 
             <div className="hero-buddy-card">

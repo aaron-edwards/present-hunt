@@ -70,10 +70,10 @@ export function UnicornBuddy({
       <Image
         alt={asset.alt}
         className={imageClassName}
-        height={512}
+        height={256}
         priority={priority}
         src={asset.src}
-        width={512}
+        width={256}
       />
     </div>
   );
