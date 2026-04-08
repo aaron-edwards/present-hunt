@@ -1,7 +1,5 @@
 import huntFile from "@/content/hunt.json";
 
-export type HuntStepType = "text" | "image" | "video";
-
 type HuntTheme = {
   accent: string;
   accentSoft: string;
@@ -31,13 +29,9 @@ export type HuntStep = {
   id: string;
   order: number;
   title: string;
-  type: HuntStepType;
   body: string;
+  solution: string;
   hint?: string;
-  hintImage?: string;
-  mediaUrl?: string;
-  embedUrl?: string;
-  caption?: string;
 };
 
 export type HuntConfig = {
@@ -77,14 +71,7 @@ function normaliseHuntConfig(rawConfig: HuntConfig): HuntConfig {
     assert(step.order > 0, `step "${step.id}" needs a positive order`);
     assert(step.title, `step "${step.id}" needs a title`);
     assert(step.body, `step "${step.id}" needs body copy`);
-
-    if (step.type === "image") {
-      assert(step.mediaUrl, `image step "${step.id}" needs mediaUrl`);
-    }
-
-    if (step.type === "video") {
-      assert(step.embedUrl, `video step "${step.id}" needs embedUrl`);
-    }
+    assert(step.solution, `step "${step.id}" needs a solution`);
   });
 
   return {

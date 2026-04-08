@@ -33,43 +33,28 @@
   },
   "steps": [
     {
-      "id": "birthday-card",
+      "id": "question-1",
       "order": 1,
       "title": "Clue One",
-      "type": "text",
-      "body": "Where paper wishes like to stay, your first small clue may hide away.",
-      "hint": "Think of a place that already holds little paper memories or messages.",
-      "hintImage": "/media/keepsake-shelf.svg"
+      "body": "Seek the tiny sage so wise, with pointed palm and watchful eyes. Behind that pose, where secrets stay, your next small verse is tucked away.",
+      "hint": "Look behind the Baby Yoda statue with one hand stretched out like the Force.",
+      "solution": "Behind the Baby Yoda (Grogu) statue with his arm out."
     },
     {
-      "id": "sweet-something",
+      "id": "question-2",
       "order": 2,
       "title": "Clue Two",
-      "type": "image",
-      "body": "Where little treats are tucked from view, there waits a brighter hint for you.",
-      "mediaUrl": "/media/snack-drawer.svg",
-      "caption": "A cheerful placeholder image. Swap this for a photo or clue image later.",
-      "hint": "Somewhere snacks go to wait patiently.",
-      "hintImage": "/media/kitchen-clue.svg"
+      "body": "Find where your face looks back at you, with disco sparkle shining through. Behind that shine, just out of view, another singing clue waits for you.",
+      "hint": "Check behind the mirror that has been decorated with mirror balls.",
+      "solution": "Behind the mirror decorated with mirror balls."
     },
     {
-      "id": "soundtrack",
+      "id": "question-3",
       "order": 3,
       "title": "Clue Three",
-      "type": "video",
-      "body": "A tune, a note, a moving clue, may hum the next stop just for you.",
-      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?si=2f8d1U9f2P1l2x3M",
-      "caption": "Replace the embed URL with your own clue video.",
-      "hint": "Follow the vibe of the clip to the next hiding place."
-    },
-    {
-      "id": "present-time",
-      "order": 4,
-      "title": "Final Clue",
-      "type": "text",
-      "body": "The final sign is tucked quite near the gift or note that waits right here.",
-      "hint": "Hide the last code somewhere delightfully obvious once she has earned it.",
-      "hintImage": "/media/final-gift.svg"
+      "body": "Outside where little berries grow, beneath the net in rows below, where makeshift shelter guards each patch, your hidden clue is there to catch.",
+      "hint": "Check the strawberry patch outside, around the makeshift netting setup.",
+      "solution": "In the outdoor strawberry patch near the makeshift netting."
     }
   ]
 }

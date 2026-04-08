@@ -29,7 +29,7 @@ export default async function QrPage() {
           <QrCard
             key={step.id}
             title={`${step.order}. ${step.title}`}
-            subtitle={`Hide this at the answer to clue ${step.order}. Scanning it records progress and unlocks the next screen.`}
+            subtitle={`Hide this at the answer to clue ${step.order}. Solution: ${step.solution}`}
             value={`${baseUrl}${getScanDestination(step.id)}`}
           />
         ))}
