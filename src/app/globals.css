@@ -279,7 +279,7 @@ iframe {
 }
 
 .hero-buddy-asset,
-.buddy-note-art,
+.clue-buddy,
 .celebration-buddy,
 .finish-buddy,
 .success-buddy {
@@ -289,7 +289,7 @@ iframe {
 }
 
 .hero-illustration {
-  width: min(100%, 250px);
+  width: min(100%, 190px);
   height: auto;
   filter: drop-shadow(0 16px 32px rgba(106, 99, 255, 0.18));
 }
@@ -372,6 +372,7 @@ figcaption {
   color: var(--color-text);
   font-size: clamp(1.15rem, 3.8vw, 1.42rem);
   line-height: 1.72;
+  white-space: pre-line;
 }
 
 .button-group {
@@ -489,41 +490,8 @@ figcaption {
   padding: 24px 20px;
 }
 
-.buddy-note {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 112px;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid rgba(217, 212, 255, 0.78);
-  border-radius: 22px;
-  padding: 10px 12px;
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(126, 213, 255, 0.12),
-      transparent 36%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.88),
-      rgba(240, 246, 255, 0.84)
-    );
-}
-
-.buddy-note-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.buddy-note-text {
-  color: var(--color-muted);
-  font-size: 0.96rem;
-  line-height: 1.45;
-}
-
-.buddy-note-image {
-  width: min(100%, 112px);
+.clue-buddy-image {
+  width: min(100%, 132px);
   height: auto;
   filter: drop-shadow(0 10px 16px rgba(106, 99, 255, 0.12));
 }
@@ -823,7 +791,7 @@ code {
 
 .celebration-buddy-image,
 .finish-buddy-image {
-  width: min(100%, 200px);
+  width: min(100%, 172px);
   height: auto;
   filter: drop-shadow(0 16px 28px rgba(106, 99, 255, 0.18));
 }
@@ -989,22 +957,16 @@ code {
   }
 
   .hero-buddy-art .hero-illustration {
-    width: min(100%, 220px);
+    width: min(100%, 200px);
   }
 
-  .buddy-note {
-    grid-template-columns: minmax(0, 1fr) 156px;
-    gap: 16px;
-    padding: 16px;
-  }
-
-  .buddy-note-image {
-    width: min(100%, 180px);
+  .clue-buddy-image {
+    width: min(100%, 148px);
   }
 
   .celebration-buddy-image,
   .finish-buddy-image {
-    width: min(100%, 240px);
+    width: min(100%, 210px);
   }
 
   .meta-row {

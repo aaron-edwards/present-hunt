@@ -4,7 +4,11 @@ import type { CSSProperties } from "react";
 import { HuntShell } from "@/components/hunt-shell";
 import { ProgressTracker } from "@/components/progress-tracker";
 import { UnicornBuddy } from "@/components/unicorn-buddy";
-import { getNextDestination, getStepByPublicSlug } from "@/lib/hunt";
+import {
+  getCelebrationBuddyVariant,
+  getNextDestination,
+  getStepByPublicSlug,
+} from "@/lib/hunt";
 import {
   getCompletionItems,
   isStarted,
@@ -90,7 +94,7 @@ export default async function CelebratePage({ params }: CelebratePageProps) {
         <UnicornBuddy
           className="celebration-buddy"
           imageClassName="celebration-buddy-image"
-          variant="sparklers"
+          variant={getCelebrationBuddyVariant()}
         />
         <ProgressTracker items={getCompletionItems(progress)} />
         <div className="button-group">

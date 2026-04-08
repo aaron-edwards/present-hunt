@@ -31,6 +31,21 @@
     "muted": "#6762a0",
     "border": "#d9d4ff"
   },
+  "buddy": {
+    "greeting": "happy",
+    "celebration": "sparklers",
+    "clueCycle": [
+      "triceratops",
+      "flowers",
+      "painting",
+      "racecar",
+      "donut",
+      "bubbles",
+      "cloudSeat",
+      "cloudLeap",
+      "cheer"
+    ]
+  },
   "steps": [
     {
       "id": "question-1",

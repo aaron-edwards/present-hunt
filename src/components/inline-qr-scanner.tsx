@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { UnicornBuddy } from "@/components/unicorn-buddy";
+import { getCelebrationBuddyVariant } from "@/lib/hunt";
 
 type ScanStatus =
   | { kind: "idle"; message: string }
@@ -485,7 +486,7 @@ export function InlineQrScanner() {
           <UnicornBuddy
             className="success-buddy"
             imageClassName="success-buddy-image"
-            variant="cheer"
+            variant={getCelebrationBuddyVariant()}
           />
           <p className="scanner-status-text">
             You found the right spot. Ready for the next part of the pursuit?

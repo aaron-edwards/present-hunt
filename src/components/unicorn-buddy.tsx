@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { BuddyVariant } from "@/lib/hunt";
 
 const UNICORN_ASSETS = {
   cheer: {
@@ -47,7 +48,7 @@ const UNICORN_ASSETS = {
   },
 } as const;
 
-export type UnicornVariant = keyof typeof UNICORN_ASSETS;
+export type UnicornVariant = BuddyVariant;
 
 type UnicornBuddyProps = {
   variant: UnicornVariant;

@@ -1,6 +1,6 @@
 import { HuntShell } from "@/components/hunt-shell";
 import { UnicornBuddy } from "@/components/unicorn-buddy";
-import { getHunt } from "@/lib/hunt";
+import { getGreetingBuddyVariant, getHunt } from "@/lib/hunt";
 
 export default function HomePage() {
   const hunt = getHunt();
@@ -32,7 +32,7 @@ export default function HomePage() {
                   className="hero-buddy-asset"
                   imageClassName="hero-illustration"
                   priority
-                  variant="happy"
+                  variant={getGreetingBuddyVariant()}
                 />
               </div>
             </div>

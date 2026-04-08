@@ -1,5 +1,18 @@
 import huntFile from "@/content/hunt.json";
 
+export type BuddyVariant =
+  | "cheer"
+  | "cloudLeap"
+  | "cloudSeat"
+  | "happy"
+  | "sparklers"
+  | "bubbles"
+  | "triceratops"
+  | "racecar"
+  | "painting"
+  | "flowers"
+  | "donut";
+
 type HuntTheme = {
   accent: string;
   accentSoft: string;
@@ -34,6 +47,12 @@ export type HuntStep = {
   hint?: string;
 };
 
+type HuntBuddy = {
+  greeting: BuddyVariant;
+  celebration: BuddyVariant;
+  clueCycle: BuddyVariant[];
+};
+
 export type HuntConfig = {
   slug: string;
   title: string;
@@ -41,6 +60,7 @@ export type HuntConfig = {
   intro: HuntIntro;
   finish: HuntFinish;
   theme: HuntTheme;
+  buddy: HuntBuddy;
   steps: HuntStep[];
 };
 
@@ -53,6 +73,14 @@ function assert(condition: unknown, message: string): asserts condition {
 function normaliseHuntConfig(rawConfig: HuntConfig): HuntConfig {
   assert(rawConfig.slug, "slug is required");
   assert(rawConfig.title, "title is required");
+  assert(rawConfig.buddy, "buddy config is required");
+  assert(rawConfig.buddy.greeting, "buddy greeting variant is required");
+  assert(rawConfig.buddy.celebration, "buddy celebration variant is required");
+  assert(
+    Array.isArray(rawConfig.buddy.clueCycle) &&
+      rawConfig.buddy.clueCycle.length > 0,
+    "buddy clueCycle must include at least one variant",
+  );
   assert(
     Array.isArray(rawConfig.steps) && rawConfig.steps.length > 0,
     "at least one step is required",
@@ -125,6 +153,20 @@ export function getStepByPublicSlug(stepSlug: string): HuntStep | undefined {
 
 export function getStepIndex(stepId: string): number {
   return huntConfig.steps.findIndex((step) => step.id === stepId);
+}
+
+export function getGreetingBuddyVariant(): BuddyVariant {
+  return huntConfig.buddy.greeting;
+}
+
+export function getCelebrationBuddyVariant(): BuddyVariant {
+  return huntConfig.buddy.celebration;
+}
+
+export function getClueBuddyVariant(stepNumber: number): BuddyVariant {
+  const clueCycle = huntConfig.buddy.clueCycle;
+  const cycleIndex = (Math.max(stepNumber, 1) - 1) % clueCycle.length;
+  return clueCycle[cycleIndex];
 }
 
 export function getNextDestination(stepId: string): string {
