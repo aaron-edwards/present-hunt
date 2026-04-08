@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
 import { InlineQrScanner } from "@/components/inline-qr-scanner";
 import type { HuntStep } from "@/lib/hunt";
@@ -19,8 +18,6 @@ export function HuntStepCard({
   totalSteps,
   nextDestinationLabel,
 }: HuntStepCardProps) {
-  const [showHint, setShowHint] = useState(false);
-
   return (
     <article className="card">
       <p className="eyebrow">
@@ -66,15 +63,9 @@ export function HuntStepCard({
       <InlineQrScanner />
 
       {step.hint || step.hintImage ? (
-        <div className="hint-block">
-          <button
-            className="button button-secondary"
-            type="button"
-            onClick={() => setShowHint((value) => !value)}
-          >
-            {showHint ? "Hide Hint" : "Show Hint"}
-          </button>
-          {showHint ? (
+        <details className="hint-block">
+          <summary className="hint-summary">Show Hint</summary>
+          <div className="hint-content">
             <div className="hint-panel">
               {step.hint ? <p>{step.hint}</p> : null}
               {step.hintImage ? (
@@ -87,8 +78,8 @@ export function HuntStepCard({
                 />
               ) : null}
             </div>
-          ) : null}
-        </div>
+          </div>
+        </details>
       ) : null}
     </article>
   );
