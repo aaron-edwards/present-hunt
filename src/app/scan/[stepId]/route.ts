@@ -38,6 +38,16 @@ function getRandomMessage() {
   ];
 }
 
+function getBlockedResponse(currentStepId?: string) {
+  return {
+    currentDestination: currentStepId
+      ? getHuntDestination(currentStepId)
+      : "/hunt",
+    message: "Not this one yet. Try the QR hidden at the spot from this clue.",
+    status: "blocked" as const,
+  };
+}
+
 export async function GET(request: Request, context: ScanRouteContext) {
   const { stepId } = await context.params;
   const step = getStepByPublicSlug(stepId);
@@ -67,10 +77,9 @@ export async function GET(request: Request, context: ScanRouteContext) {
     const currentStep = hunt.steps[getCurrentStepIndex(progress)];
 
     if (inlineMode) {
-      return NextResponse.json({
-        destination: currentStep ? getHuntDestination(currentStep.id) : "/done",
-        status: "redirect",
-      });
+      return NextResponse.json(
+        getBlockedResponse(currentStep ? currentStep.id : undefined),
+      );
     }
 
     return NextResponse.redirect(
@@ -86,10 +95,9 @@ export async function GET(request: Request, context: ScanRouteContext) {
     const currentStep = hunt.steps[getCurrentStepIndex(progress)];
 
     if (inlineMode) {
-      return NextResponse.json({
-        destination: currentStep ? getHuntDestination(currentStep.id) : "/done",
-        status: "redirect",
-      });
+      return NextResponse.json(
+        getBlockedResponse(currentStep ? currentStep.id : undefined),
+      );
     }
 
     return NextResponse.redirect(

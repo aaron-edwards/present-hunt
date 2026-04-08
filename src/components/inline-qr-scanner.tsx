@@ -18,6 +18,11 @@ type InlineScanResult =
       status: "redirect";
     }
   | {
+      currentDestination: string;
+      message: string;
+      status: "blocked";
+    }
+  | {
       message: string;
       nextDestination: string;
       nextLabel: string;
@@ -76,6 +81,8 @@ export function InlineQrScanner() {
   const streamRef = useRef<MediaStream | null>(null);
   const detectorRef = useRef<BarcodeDetectorLike | null>(null);
   const frameRef = useRef<number | null>(null);
+  const feedbackTimeoutRef = useRef<number | null>(null);
+  const processingRef = useRef(false);
   const [scannerOpen, setScannerOpen] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [showAvailabilityPopup, setShowAvailabilityPopup] = useState(false);
@@ -94,6 +101,9 @@ export function InlineQrScanner() {
     message:
       "Open the camera here if you want to scan the next QR without leaving the page.",
   });
+  const [scannerFeedback, setScannerFeedback] = useState<
+    "idle" | "error" | "success"
+  >("idle");
 
   useEffect(() => {
     setHasMounted(true);
@@ -172,14 +182,26 @@ export function InlineQrScanner() {
           track.stop();
         }
       }
+
+      if (feedbackTimeoutRef.current) {
+        window.clearTimeout(feedbackTimeoutRef.current);
+      }
     };
   }, []);
 
   useEffect(() => {
     if (!scannerOpen) {
+      processingRef.current = false;
+      setScannerFeedback("idle");
+
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);
         frameRef.current = null;
+      }
+
+      if (feedbackTimeoutRef.current) {
+        window.clearTimeout(feedbackTimeoutRef.current);
+        feedbackTimeoutRef.current = null;
       }
 
       if (streamRef.current) {
@@ -259,6 +281,11 @@ export function InlineQrScanner() {
             return;
           }
 
+          if (processingRef.current) {
+            frameRef.current = requestAnimationFrame(scanFrame);
+            return;
+          }
+
           if (
             videoRef.current.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA
           ) {
@@ -272,15 +299,11 @@ export function InlineQrScanner() {
               );
 
               if (match?.rawValue) {
+                processingRef.current = true;
                 setScanStatus({
                   kind: "active",
-                  message:
-                    "QR found. Wrapping your tiny victory in sparkles...",
+                  message: "Checking that QR...",
                 });
-
-                for (const track of stream.getTracks()) {
-                  track.stop();
-                }
 
                 const inlineUrl = new URL(match.rawValue, window.location.href);
                 inlineUrl.searchParams.set("mode", "inline");
@@ -292,20 +315,50 @@ export function InlineQrScanner() {
                 const result = (await response.json()) as InlineScanResult;
 
                 if (result.status === "redirect") {
+                  for (const track of stream.getTracks()) {
+                    track.stop();
+                  }
                   window.location.assign(result.destination);
                   return;
                 }
 
-                setSuccessState({
-                  message: result.message,
-                  nextDestination: result.nextDestination,
-                  nextLabel: result.nextLabel,
+                if (result.status === "blocked") {
+                  setScannerFeedback("error");
+                  setScanStatus({
+                    kind: "active",
+                    message: result.message,
+                  });
+                  feedbackTimeoutRef.current = window.setTimeout(() => {
+                    setScannerFeedback("idle");
+                    processingRef.current = false;
+                  }, 850);
+                  return;
+                }
+
+                setScannerFeedback("success");
+                setScanStatus({
+                  kind: "active",
+                  message: "That is the right QR. Loading the celebration...",
                 });
-                setScannerOpen(false);
-                setSuccessOpen(true);
+                feedbackTimeoutRef.current = window.setTimeout(() => {
+                  for (const track of stream.getTracks()) {
+                    track.stop();
+                  }
+
+                  setSuccessState({
+                    message: result.message,
+                    nextDestination: result.nextDestination,
+                    nextLabel: result.nextLabel,
+                  });
+                  setScannerOpen(false);
+                  setSuccessOpen(true);
+                  setScannerFeedback("idle");
+                  processingRef.current = false;
+                }, 350);
                 return;
               }
             } catch {
+              processingRef.current = false;
               setScanStatus({
                 kind: "error",
                 message:
@@ -438,7 +491,15 @@ export function InlineQrScanner() {
               muted
               playsInline
             />
-            <div className="scanner-target" />
+            <div
+              className={`scanner-target${
+                scannerFeedback === "error"
+                  ? " scanner-target-error"
+                  : scannerFeedback === "success"
+                    ? " scanner-target-success"
+                    : ""
+              }`}
+            />
           </div>
 
           <p className="scanner-help">

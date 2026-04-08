@@ -772,6 +772,14 @@ figcaption {
   pointer-events: none;
 }
 
+.scanner-target-error {
+  animation: scanner-flash-error 420ms ease;
+}
+
+.scanner-target-success {
+  animation: scanner-flash-success 320ms ease;
+}
+
 .scanner-popup {
   display: flex;
   flex-direction: column;
@@ -1040,6 +1048,54 @@ code {
 
   100% {
     background-position-x: -80%;
+  }
+}
+
+@keyframes scanner-flash-error {
+  0% {
+    border-color: rgba(255, 255, 255, 0.92);
+    box-shadow:
+      0 0 0 999px rgba(18, 11, 7, 0.22),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  }
+
+  35% {
+    border-color: #ff5d6c;
+    box-shadow:
+      0 0 0 999px rgba(18, 11, 7, 0.22),
+      0 0 0 6px rgba(255, 93, 108, 0.18),
+      inset 0 0 0 1px rgba(255, 93, 108, 0.38);
+  }
+
+  100% {
+    border-color: rgba(255, 255, 255, 0.92);
+    box-shadow:
+      0 0 0 999px rgba(18, 11, 7, 0.22),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  }
+}
+
+@keyframes scanner-flash-success {
+  0% {
+    border-color: rgba(255, 255, 255, 0.92);
+    box-shadow:
+      0 0 0 999px rgba(18, 11, 7, 0.22),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  }
+
+  40% {
+    border-color: #41d37b;
+    box-shadow:
+      0 0 0 999px rgba(18, 11, 7, 0.22),
+      0 0 0 6px rgba(65, 211, 123, 0.18),
+      inset 0 0 0 1px rgba(65, 211, 123, 0.32);
+  }
+
+  100% {
+    border-color: rgba(255, 255, 255, 0.92);
+    box-shadow:
+      0 0 0 999px rgba(18, 11, 7, 0.22),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.25);
   }
 }
 
