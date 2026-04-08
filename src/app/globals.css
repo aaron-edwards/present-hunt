@@ -189,6 +189,12 @@ figcaption {
   transform: translateY(-1px);
 }
 
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
 .button-primary {
   border: 0;
   color: white;
@@ -316,6 +322,11 @@ figcaption {
 .scanner-copy h3,
 .scanner-copy p {
   margin: 0;
+}
+
+.scanner-warning {
+  color: var(--color-muted);
+  font-size: 0.95rem;
 }
 
 .scanner-frame {

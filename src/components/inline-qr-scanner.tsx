@@ -65,6 +65,26 @@ export function InlineQrScanner() {
     );
   }, []);
 
+  const availabilityMessage = useMemo(() => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+
+    if (!window.isSecureContext) {
+      return `This page is not running in a secure context. The in-page scanner works on https:// pages and on localhost, but not on plain http://${window.location.host}.`;
+    }
+
+    if (typeof navigator.mediaDevices?.getUserMedia !== "function") {
+      return "This browser does not expose camera access for in-page scanning.";
+    }
+
+    if (typeof window.BarcodeDetector !== "function") {
+      return "This browser can open the camera, but it does not expose BarcodeDetector for automatic QR scanning.";
+    }
+
+    return null;
+  }, []);
+
   useEffect(() => {
     return () => {
       if (frameRef.current) {
@@ -240,16 +260,20 @@ export function InlineQrScanner() {
         <p className="eyebrow">In-Page Scanner</p>
         <h3>Use the phone camera without leaving the hunt</h3>
         <p>{scanStatus.message}</p>
+        {availabilityMessage ? (
+          <p className="scanner-warning">{availabilityMessage}</p>
+        ) : null}
       </div>
 
       <div className="button-group">
         {!scannerOpen ? (
           <button
             className="button button-primary"
+            disabled={!supported}
             onClick={() => setScannerOpen(true)}
             type="button"
           >
-            Open Camera Scanner
+            {supported ? "Open Camera Scanner" : "Scanner Unavailable Here"}
           </button>
         ) : (
           <button
