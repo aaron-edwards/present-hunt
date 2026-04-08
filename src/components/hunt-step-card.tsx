@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
+import { InlineQrScanner } from "@/components/inline-qr-scanner";
 import type { HuntStep } from "@/lib/hunt";
 
 type HuntStepCardProps = {
@@ -61,6 +62,8 @@ export function HuntStepCard({
         </p>
         <p className="scan-copy">{nextDestinationLabel}</p>
       </div>
+
+      <InlineQrScanner />
 
       {step.hint || step.hintImage ? (
         <div className="hint-block">
